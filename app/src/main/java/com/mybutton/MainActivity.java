@@ -1,5 +1,7 @@
 package com.mybutton;
 
+import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,13 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity /*implements View.OnClickListener */{
-
+public class MainActivity extends AppCompatActivity /*implements View.OnClickListener */ {
     private Button btnOne;
     private Button btnTwo;
     private Button btnThree;
     private TextView tvOutput;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,17 +73,28 @@ public class MainActivity extends AppCompatActivity /*implements View.OnClickLis
     }*/
 
     public void goOne(View view) {
-        tvOutput.setText("Button One");
-        Toast.makeText(MainActivity.this, "bnt one", Toast.LENGTH_LONG).show();
+        //  tvOutput.setText("Button One");
+        //  startActivity(new Intent(this, SecondActivity.class));
+        // Toast.makeText(MainActivity.this, "bnt one", Toast.LENGTH_LONG).show();
+        FragmentOne fragmentOne = new FragmentOne();
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragmentContainer, fragmentOne).commit();
+
+
     }
 
     public void goTwo(View view) {
         tvOutput.setText("Button Two");
+        startActivity(new Intent(this, ThirdActivity.class));
         Toast.makeText(MainActivity.this, "bnt two", Toast.LENGTH_SHORT).show();
     }
 
     public void goThree(View view) {
-        tvOutput.setText("Button Three");
-        Toast.makeText(MainActivity.this, "bnt three", Toast.LENGTH_SHORT).show();
+       // tvOutput.setText("Button Three");
+      //  Toast.makeText(MainActivity.this, "bnt three", Toast.LENGTH_SHORT).show();
+        FragmentTwo fragmentTwo = new FragmentTwo();
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragmentContainer, fragmentTwo).commit();
+
     }
 }
